@@ -208,7 +208,6 @@ public class DroidResourceUtil {
 		}
 		results.setFileLength(request.size());
 		results.setRequestMetaData(request.getRequestMetaData());
-		removeLowerPriorityHits(results);
 		return results;
 	}
 
@@ -251,7 +250,6 @@ public class DroidResourceUtil {
 				DROIDContainersInvoker invoker = new DROIDContainersInvoker();
 				invoker.setContainerSigDef(containerSigDef);
 				IdentificationResultCollection containerResults = invoker.invoke(containerIdentifier, request, containerFormat, maxBytesToScan);
-				removeLowerPriorityHits(containerResults);
 				return containerResults.getResults().isEmpty() ? null : containerResults;
 			}
 		} catch (Exception e) {
@@ -371,7 +369,7 @@ public class DroidResourceUtil {
 			request.open(in);
 
 			results  = runBinarySignatureIdentification(filePath, request);
-			if(results != null && results.getResults() != null && results.getResults().size() == 1){
+			if(results != null && results.getResults() != null){
 				// run container identification
 				try{
 					IdentificationResultCollection collResults = runContainerIdentification(filePath, results, request, metaData, identifier);
@@ -382,6 +380,8 @@ public class DroidResourceUtil {
 				catch (Exception e) {
 					log.error("DROID container signature identification failed "+filePath, e);
 				}
+
+				removeLowerPriorityHits(results);
 			}
 		}
 		catch (IOException e) {
