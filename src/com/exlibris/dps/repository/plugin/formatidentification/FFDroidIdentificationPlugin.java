@@ -21,7 +21,7 @@ public class FFDroidIdentificationPlugin implements FormatIdentificationPlugin {
 
     private static final String PLUGIN_VERSION_INIT_PARAM = "PLUGIN_VERSION_INIT_PARAM";
 	private static String AGENT_NAME = "REG_SA_DROID";
-	private static String AGENT_VERSION = "6.1.5";
+	private static String AGENT_VERSION = "6.3";
 	private static String REGISTRY_NAME = "PRONOM";
 	private long maxBytesToScan = 65536;
 	private boolean inTag = false;

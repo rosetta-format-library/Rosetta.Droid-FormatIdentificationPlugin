@@ -188,7 +188,7 @@ public class DroidResourceUtil {
 	 * Run binary signature identification on the file
 	 * @param request
 	 */
-	public IdentificationResultCollection runBinarySignatureIdentification(String filePath, IdentificationRequest request){
+	public IdentificationResultCollection runBinarySignatureIdentification(String filePath, IdentificationRequest<File> request){
 		IdentificationResultCollection results = null;
 		results = new IdentificationResultCollection(request);
 		results.setRequestMetaData(request.getRequestMetaData());
@@ -219,7 +219,7 @@ public class DroidResourceUtil {
 	 * @throws IOException
 	 */
 	public IdentificationResultCollection runContainerIdentification(String filePath, IdentificationResultCollection results,
-			IdentificationRequest request, RequestMetaData metaData, RequestIdentifier identifier) throws Exception {
+			IdentificationRequest<File> request, RequestMetaData metaData, RequestIdentifier identifier) throws Exception {
 		if(results == null || results.getResults() == null || results.getResults().isEmpty()){
 			return null;
 		}
@@ -232,7 +232,7 @@ public class DroidResourceUtil {
 		return results;
 	}
 
-	private IdentificationResultCollection handleContainer(IdentificationRequest request, IdentificationResultCollection results,
+	private IdentificationResultCollection handleContainer(IdentificationRequest<File> request, IdentificationResultCollection results,
 			RequestMetaData metaData, RequestIdentifier identifier)
 	throws Exception {
 		// process a container format (ole2, zip, etc)
@@ -355,7 +355,7 @@ public class DroidResourceUtil {
 	}
 	public FormatIdentificationResult runFormatIdentification(String filePath) throws IOException{
 		InputStream in = null;
-		IdentificationRequest request = null;
+		IdentificationRequest<File> request = null;
 		IdentificationResultCollection results = null;
 		try {
 			File file = new File(filePath);
@@ -366,7 +366,7 @@ public class DroidResourceUtil {
 			RequestIdentifier identifier = new RequestIdentifier(resourceUri);
 			identifier.setParentId(1L);
 			request = new FileSystemIdentificationRequest(metaData, identifier);
-			request.open(in);
+			request.open(file);
 
 			results  = runBinarySignatureIdentification(filePath, request);
 			if(results != null && results.getResults() != null){
@@ -384,7 +384,7 @@ public class DroidResourceUtil {
 				removeLowerPriorityHits(results);
 			}
 		}
-		catch (IOException e) {
+		catch (Exception e) {
 			log.error("DROID signature identification failure "+filePath, e);
 			throw e;
 		}

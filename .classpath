@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="lib/dps-sdk-4.2.1.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/antlr-runtime-3.2.jar"/>
-	<classpathentry kind="lib" path="lib/byteseek-1.1.jar"/>
+	<classpathentry kind="lib" path="lib/aspectjrt-1.8.7.jar"/>
+	<classpathentry kind="lib" path="lib/byteseek-2.0.3.jar"/>
 	<classpathentry kind="lib" path="lib/commons-beanutils-1.7.0.jar"/>
-	<classpathentry kind="lib" path="lib/commons-codec-1.4.jar"/>
-	<classpathentry kind="lib" path="lib/commons-collections-3.2.1.jar"/>
-	<classpathentry kind="lib" path="lib/commons-compress-1.0.jar"/>
-	<classpathentry kind="lib" path="lib/commons-configuration-1.6.jar"/>
+	<classpathentry kind="lib" path="lib/commons-codec-1.10.jar"/>
+	<classpathentry kind="lib" path="lib/commons-collections-3.2.2.jar"/>
+	<classpathentry kind="lib" path="lib/commons-compress-1.4.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-configuration-1.8.jar"/>
 	<classpathentry kind="lib" path="lib/commons-dbcp-1.2.jar"/>
 	<classpathentry kind="lib" path="lib/commons-httpclient-3.1.jar"/>
-	<classpathentry kind="lib" path="lib/commons-io-2.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-io-2.4.jar"/>
 	<classpathentry kind="lib" path="lib/commons-lang-2.6.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
-	<classpathentry kind="lib" path="lib/droid-container-6.1.5.jar"/>
-	<classpathentry kind="lib" path="lib/droid-core-6.1.5.jar"/>
-	<classpathentry kind="lib" path="lib/droid-core-interfaces-6.1.5.jar"/>
+	<classpathentry kind="lib" path="lib/dps-sdk-4.2.1.jar"/>
+	<classpathentry kind="lib" path="lib/droid-container-6.3.jar"/>
+	<classpathentry kind="lib" path="lib/droid-core-6.3.jar"/>
+	<classpathentry kind="lib" path="lib/droid-core-interfaces-6.3.jar"/>
 	<classpathentry kind="lib" path="lib/droid-lib-2.0.jar"/>
 	<classpathentry kind="lib" path="lib/javahelp-2.0.05.jar"/>
-	<classpathentry kind="lib" path="lib/poi-3.7-20101029.jar"/>
-	<classpathentry kind="lib" path="lib/truezip-6.8.1.jar"/>
+	<classpathentry kind="lib" path="lib/joda-time-1.6.2.jar"/>
+	<classpathentry kind="lib" path="lib/jwat-archive-common-1.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/jwat-common-1.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/jwat-gzip-1.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/jwat-warc-1.0.2.jar"/>
+	<classpathentry kind="lib" path="lib/trove4j-3.0.3.jar"/>
+	<classpathentry kind="lib" path="lib/truezip-6.8.4.jar"/>
 	<classpathentry kind="lib" path="lib/xercesImpl-2.9.1.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="lib" path="lib/xz-1.0.jar"/>
+	<classpathentry kind="lib" path="lib/poi-3.13.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
