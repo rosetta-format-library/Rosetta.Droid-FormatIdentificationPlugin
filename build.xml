@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Droid-FormatIdentificationPlugin" basedir="." default="build-all">
+	<property file="build.properties" />
+	<path id="classpath">
+		<fileset dir="${lib.dir}" includes="**.jar" />
+	</path>
+	<target name="build-all" depends="clean, init, copy_jars, copy_conf, copy_de, compile, build_jar" />
+	<target name="clean">
+		<echo>Cleaning the ${build.dir} and ${target.dir} directories</echo>
+		<delete dir="${build.dir}" />
+		<delete dir="${target.dir}" />
+	</target>
+	<target name="init" depends="clean">
+		<echo>Creating the ${build.dir} and ${target.dir} directories</echo>
+		<mkdir dir="${build.dir}/classes" />
+		<mkdir dir="${build.dir}/lib" />
+		<mkdir dir="${build.dir}/conf" />
+		<mkdir dir="${build.dir}/de" />
+		<mkdir dir="${target.dir}" />
+	</target>
+	<target name="copy_jars">
+		<echo>Copy lib jars</echo>
+		<copy todir="${build.dir}/lib" overwrite="true">
+			<fileset dir="${lib.dir}" includes="**.jar" excludes="dps-sdk**" />
+		</copy>
+	</target>
+	<target name="copy_conf">
+			<echo>Copy conf files</echo>
+			<copy todir="${build.dir}/conf" overwrite="true">
+				<fileset dir="${conf.dir}" includes="*.xml" />
+			</copy>
+	</target>
+	<target name="copy_de">
+			<echo>Copy de files</echo>
+			<copy todir="${build.dir}/de" overwrite="true">
+				<fileset dir="${conf.dir}/de" includes="**" />
+			</copy>
+	</target>
+	<target name="compile" depends="init">
+		<echo>Compile the source files</echo>
+		<javac srcdir="${src.dir}" destdir="${build.dir}/classes" debug="true"
+			includeantruntime="false">
+			<classpath refid="classpath" />
+		</javac>
+	</target>
+	<target name="build_jar" depends="compile">
+		<echo> Build DriodIdentificationPlugin jar </echo>
+		<jar destfile="${target.dir}/FFDroidIdentifier.jar" basedir="${build.dir}/classes">
+			<fileset dir="${src.dir}" includes="**" excludes=" com/**" />
+			<fileset dir="${build.dir}" includes="*lib/*.jar, conf/**, de/**" excludes="classes/**" />
+			<!--manifest>
+				<attribute name="Main-Class" value="com.exlibris.dps.repository.plugin.formatidentification.FFDroidIdentificationPlugin" />
+			</manifest-->
+		</jar>
+	</target>
+</project>
