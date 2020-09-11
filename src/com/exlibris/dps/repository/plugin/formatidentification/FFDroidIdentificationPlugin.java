@@ -18,10 +18,9 @@ import com.exlibris.dps.sdk.formatidentification.FormatIdentificationPlugin;
 import com.exlibris.dps.sdk.formatidentification.FormatIdentificationResult;
 
 public class FFDroidIdentificationPlugin implements FormatIdentificationPlugin {
-
-    private static final String PLUGIN_VERSION_INIT_PARAM = "PLUGIN_VERSION_INIT_PARAM";
+  private static final String PLUGIN_VERSION_INIT_PARAM = "PLUGIN_VERSION_INIT_PARAM";
 	private static String AGENT_NAME = "REG_SA_DROID";
-	private static String AGENT_VERSION = "6.3";
+	private static String AGENT_VERSION = "6.5";
 	private static String REGISTRY_NAME = "PRONOM";
 	private long maxBytesToScan = 65536;
 	private boolean inTag = false;
@@ -35,7 +34,7 @@ public class FFDroidIdentificationPlugin implements FormatIdentificationPlugin {
 	 * this parameter is used for signature file caching. When new signature file attached, update SIG_VERSION
 	 * Or 2 different plugins with the same jar path and jar name
 	 */
-	private static String SIG_VERSION = "_52";
+	private static String SIG_VERSION = "_53";
 
 	static{
 		Map map;
@@ -59,11 +58,11 @@ public class FFDroidIdentificationPlugin implements FormatIdentificationPlugin {
 
 	@Override
 	public String getAgentSignatureVersion() {
-		/* (‘Binary SF v.X  / Container SF v.Y’ for the DROID 6 format identification
+		/* ('Binary SF v.X  / Container SF v.Y'for the DROID 6 format identification
 		 * plugin, where X is extracted from the binary signature file header
-		 * <FFSignatureFile DateCreated="2011-09-07T00:15:08" Version="52" …
+		 * <FFSignatureFile DateCreated="2011-09-07T00:15:08" Version="52"
 		 * and Y is extracted from the container signature file header
-		 * (<ContainerSignatureMapping schemaVersion="1.0" signatureVersion="1"> …)
+		 * (<ContainerSignatureMapping schemaVersion="1.0" signatureVersion="1">)
 		 */
 		String sigVersion = "";
 		String containerVersion = "";
