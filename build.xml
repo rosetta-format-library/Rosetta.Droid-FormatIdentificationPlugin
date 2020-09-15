@@ -4,7 +4,7 @@
 	<path id="classpath">
 		<fileset dir="${lib.dir}" includes="**.jar" />
 	</path>
-	<target name="build-all" depends="clean, init, copy_jars, copy_conf, compile, build_jar" />
+	<target name="build-all" depends="clean, init, copy_jars, copy_conf, copy_de, compile, build_jar" />
 	<target name="clean">
 		<echo>Cleaning the ${build.dir} and ${target.dir} directories</echo>
 		<delete dir="${build.dir}" />
@@ -15,6 +15,7 @@
 		<mkdir dir="${build.dir}/classes" />
 		<mkdir dir="${build.dir}/lib" />
 		<mkdir dir="${build.dir}/conf" />
+		<mkdir dir="${build.dir}/de" />
 		<mkdir dir="${target.dir}" />
 	</target>
 	<target name="copy_jars">
@@ -26,9 +27,15 @@
 	<target name="copy_conf">
 			<echo>Copy conf files</echo>
 			<copy todir="${build.dir}/conf" overwrite="true">
-				<fileset dir="${conf.dir}" includes="**" />
+				<fileset dir="${conf.dir}" includes="*.xml" />
 			</copy>
-		</target>
+	</target>
+	<target name="copy_de">
+			<echo>Copy de files</echo>
+			<copy todir="${build.dir}/de" overwrite="true">
+				<fileset dir="${conf.dir}/de" includes="**" />
+			</copy>
+	</target>
 	<target name="compile" depends="init">
 		<echo>Compile the source files</echo>
 		<javac srcdir="${src.dir}" destdir="${build.dir}/classes" debug="true"
@@ -38,14 +45,12 @@
 	</target>
 	<target name="build_jar" depends="compile">
 		<echo> Build DriodIdentificationPlugin jar </echo>
-		<jar destfile="${target.dir}/FFDroidIdentifier.jar"
-			basedir="${build.dir}/classes">
+		<jar destfile="${target.dir}/FFDroidIdentifier.jar" basedir="${build.dir}/classes">
 			<fileset dir="${src.dir}" includes="**" excludes=" com/**" />
-			<fileset dir="${build.dir}" includes="*lib/*.jar, conf/**" excludes="classes/**" />
-			<manifest>
-				<attribute name="Main-Class"
-					value="com.exlibris.dps.repository.plugin.formatidentification.FFDroidIdentificationPlugin" />
-			</manifest>
+			<fileset dir="${build.dir}" includes="*lib/*.jar, conf/**, de/**" excludes="classes/**" />
+			<!--manifest>
+				<attribute name="Main-Class" value="com.exlibris.dps.repository.plugin.formatidentification.FFDroidIdentificationPlugin" />
+			</manifest-->
 		</jar>
 	</target>
 </project>
