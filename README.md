@@ -8,5 +8,3 @@ How to upgrade Droid:
 5) Under the conf folder, replace DROID_SignatureFile.xml with the related one from: https://www.nationalarchives.gov.uk/aboutapps/pronom/droid-signature-files.htm
 6) Under the conf folder, replace container-signature.xml with the related one from: https://www.nationalarchives.gov.uk/aboutapps/pronom/droid-signature-files.htm
 7) Build the plugin with command line: $ant
-
-6.5
