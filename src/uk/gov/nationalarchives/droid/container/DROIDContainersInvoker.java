@@ -2,6 +2,7 @@ package uk.gov.nationalarchives.droid.container;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -41,7 +42,7 @@ public class DROIDContainersInvoker {
 	 * @return DROID identification results
 	 * @throws IOException
 	 */
-	public IdentificationResultCollection invoke(AbstractContainerIdentifier containerIdentifier, IdentificationRequest<File> request, String containerType, long maxBytesToScan) throws IOException{
+	public IdentificationResultCollection invoke(AbstractContainerIdentifier containerIdentifier, IdentificationRequest<Path> request, String containerType, long maxBytesToScan) throws IOException{
 
 		Map<Integer, List<FileFormatMapping>> formats = new HashMap<Integer, List<FileFormatMapping>>();
 		for (FileFormatMapping fmt : containerSigDef.getFormats()) {
