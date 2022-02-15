@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="lib/antlr-runtime-3.2.jar"/>
 	<classpathentry kind="lib" path="lib/aspectjrt-1.8.7.jar"/>
 	<classpathentry kind="lib" path="lib/byteseek-2.0.3.jar"/>
@@ -16,9 +15,6 @@
 	<classpathentry kind="lib" path="lib/commons-lang-2.6.jar"/>
 	<classpathentry kind="lib" path="lib/commons-logging-1.1.1.jar"/>
 	<classpathentry kind="lib" path="lib/dps-sdk-4.2.1.jar"/>
-	<classpathentry kind="lib" path="lib/droid-container-6.3.jar"/>
-	<classpathentry kind="lib" path="lib/droid-core-6.3.jar"/>
-	<classpathentry kind="lib" path="lib/droid-core-interfaces-6.3.jar"/>
 	<classpathentry kind="lib" path="lib/droid-lib-2.0.jar"/>
 	<classpathentry kind="lib" path="lib/javahelp-2.0.05.jar"/>
 	<classpathentry kind="lib" path="lib/joda-time-1.6.2.jar"/>
@@ -27,9 +23,16 @@
 	<classpathentry kind="lib" path="lib/jwat-gzip-1.0.3.jar"/>
 	<classpathentry kind="lib" path="lib/jwat-warc-1.0.2.jar"/>
 	<classpathentry kind="lib" path="lib/trove4j-3.0.3.jar"/>
-	<classpathentry kind="lib" path="lib/truezip-6.8.4.jar"/>
 	<classpathentry kind="lib" path="lib/xercesImpl-2.9.1.jar"/>
 	<classpathentry kind="lib" path="lib/xz-1.0.jar"/>
 	<classpathentry kind="lib" path="lib/poi-3.13.jar"/>
+	<classpathentry kind="lib" path="lib/droid-container-6.5.2.jar"/>
+	<classpathentry kind="lib" path="lib/droid-core-6.5.2.jar"/>
+	<classpathentry kind="lib" path="lib/droid-core-interfaces-6.5.2.jar"/>
+	<classpathentry kind="lib" path="lib/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="lib/truezip-driver-zip-7.7.10.jar"/>
+	<classpathentry kind="lib" path="lib/truezip-kernel-7.7.10.jar"/>
+	<classpathentry kind="lib" path="lib/truezip-swing-7.7.10.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

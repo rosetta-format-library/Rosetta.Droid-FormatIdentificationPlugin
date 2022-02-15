@@ -18,9 +18,9 @@ import com.exlibris.dps.sdk.formatidentification.FormatIdentificationPlugin;
 import com.exlibris.dps.sdk.formatidentification.FormatIdentificationResult;
 
 public class FFDroidIdentificationPlugin implements FormatIdentificationPlugin {
-  private static final String PLUGIN_VERSION_INIT_PARAM = "PLUGIN_VERSION_INIT_PARAM";
+	private static final String PLUGIN_VERSION_INIT_PARAM = "PLUGIN_VERSION_INIT_PARAM";
 	private static String AGENT_NAME = "REG_SA_DROID";
-	private static String AGENT_VERSION = "6.5";
+	private static String AGENT_VERSION = "6.5.2";
 	private static String REGISTRY_NAME = "PRONOM";
 	private long maxBytesToScan = 65536;
 	private boolean inTag = false;
@@ -31,19 +31,25 @@ public class FFDroidIdentificationPlugin implements FormatIdentificationPlugin {
 	private static final ExLogger log = ExLogger.getExLogger(FFDroidIdentificationPlugin.class);
 
 	/*
-	 * this parameter is used for signature file caching. When new signature file attached, update SIG_VERSION
-	 * Or 2 different plugins with the same jar path and jar name
+	 * this parameter is used for signature file caching. When new signature file
+	 * attached, update SIG_VERSION Or 2 different plugins with the same jar path
+	 * and jar name
 	 */
-	private static String SIG_VERSION = "_53";
+	private static String SIG_VERSION = "_54";
 
-	static{
-		Map map;
+	static {
+		Map map=null;
 		try {
-			map = (Map)CacheServices.getInstance().getCache(CacheServices.DROID_SIGNATURE+SIG_VERSION);
+			try {
+				map = (Map) CacheServices.getInstance().getCache(CacheServices.DROID_SIGNATURE + SIG_VERSION);
+			}catch (Exception e) {
+				log.error("Failed parsing signature files", e);
+			}
 			if (map == null) {
 				loadSigVersionsToCache();
 			}
-			ArrayList<Object> sigList = (ArrayList<Object>) CacheServices.getInstance().getCacheValue(CacheServices.DROID_SIGNATURE+SIG_VERSION, CacheServices.DROID_SIGNATURE+SIG_VERSION);
+			ArrayList<Object> sigList = (ArrayList<Object>) CacheServices.getInstance().getCacheValue(
+					CacheServices.DROID_SIGNATURE + SIG_VERSION, CacheServices.DROID_SIGNATURE + SIG_VERSION);
 			sigFile = (FFSignatureFile) sigList.get(0);
 			containerSigDef = (ContainerSignatureDefinitions) sigList.get(1);
 		} catch (Exception e) {
@@ -58,29 +64,31 @@ public class FFDroidIdentificationPlugin implements FormatIdentificationPlugin {
 
 	@Override
 	public String getAgentSignatureVersion() {
-		/* ('Binary SF v.X  / Container SF v.Y'for the DROID 6 format identification
+		/*
+		 * ('Binary SF v.X / Container SF v.Y'for the DROID 6 format identification
 		 * plugin, where X is extracted from the binary signature file header
-		 * <FFSignatureFile DateCreated="2011-09-07T00:15:08" Version="52"
-		 * and Y is extracted from the container signature file header
+		 * <FFSignatureFile DateCreated="2011-09-07T00:15:08" Version="52" and Y is
+		 * extracted from the container signature file header
 		 * (<ContainerSignatureMapping schemaVersion="1.0" signatureVersion="1">)
 		 */
 		String sigVersion = "";
 		String containerVersion = "";
 		try {
 			sigVersion = sigFile.getVersion();
-			InputStream containerIs = this.getClass().getClassLoader().getResourceAsStream("conf/container-signature.xml");
+			InputStream containerIs = this.getClass().getClassLoader()
+					.getResourceAsStream("conf/container-signature.xml");
 			BufferedReader containerBis = new BufferedReader(new InputStreamReader(containerIs));
-			if(containerBis.ready()){
-				while(containerVersion == null || containerVersion.trim().isEmpty()){
-					containerVersion = parseVersion(containerBis.readLine(), "containersignaturemapping", "signatureversion");
+			if (containerBis.ready()) {
+				while (containerVersion == null || containerVersion.trim().isEmpty()) {
+					containerVersion = parseVersion(containerBis.readLine(), "containersignaturemapping",
+							"signatureversion");
 				}
 			}
 		} catch (Exception e) {
 			log.error("Failed to get agent signature version", e);
 		}
-		return "Binary SF v."+sigVersion+"/ Container SF v."+containerVersion;
+		return "Binary SF v." + sigVersion + "/ Container SF v." + containerVersion;
 	}
-
 
 	@Override
 	public String getAgentVersion() {
@@ -117,42 +125,43 @@ public class FFDroidIdentificationPlugin implements FormatIdentificationPlugin {
 	}
 
 	/**
-	 *  This method is called from the PluginLocator-PluginInvokationHandler.
+	 * This method is called from the PluginLocator-PluginInvokationHandler.
+	 * 
 	 * @param initParams
 	 */
 	public void initParams(Map<String, String> initParams) {
-		if(!StringUtils.isEmptyString(initParams.get("maxBytesToScan"))){
+		if (!StringUtils.isEmptyString(initParams.get("maxBytesToScan"))) {
 			maxBytesToScan = Long.parseLong(initParams.get("maxBytesToScan").trim());
 		}
 		pluginVersion = initParams.get(PLUGIN_VERSION_INIT_PARAM);
 	}
 
 	private String parseVersion(String readLine, String firstTag, String secondTag) {
-		if(readLine == null){
+		if (readLine == null) {
 			return null;
 		}
-		if(readLine.trim().isEmpty()){
+		if (readLine.trim().isEmpty()) {
 			return "";
 		}
 		readLine = readLine.toLowerCase();
-		if(inTag || readLine.indexOf(firstTag) > -1){
+		if (inTag || readLine.indexOf(firstTag) > -1) {
 			inTag = true;
 			int versionInd = readLine.indexOf(secondTag);
-			if(versionInd > -1){
-				readLine = readLine.substring(versionInd+secondTag.length()+1);
-				if(readLine == null || readLine.trim().isEmpty()){
+			if (versionInd > -1) {
+				readLine = readLine.substring(versionInd + secondTag.length() + 1);
+				if (readLine == null || readLine.trim().isEmpty()) {
 					return "";
 				}
 				readLine = readLine.trim();
-				if(readLine.startsWith("\"")){
+				if (readLine.startsWith("\"")) {
 					readLine = readLine.substring(1);
-					if(readLine == null || readLine.trim().isEmpty()){
+					if (readLine == null || readLine.trim().isEmpty()) {
 						return "";
 					}
 					readLine = readLine.trim();
 				}
 				versionInd = readLine.indexOf("\"");
-				if(versionInd > -1){
+				if (versionInd > -1) {
 					readLine = readLine.substring(0, versionInd);
 					return readLine;
 				}
@@ -165,13 +174,14 @@ public class FFDroidIdentificationPlugin implements FormatIdentificationPlugin {
 		try {
 			DroidResourceUtil droidResource = new DroidResourceUtil(pluginVersion);
 			FFSignatureFile sigFile = droidResource.readSigFile("conf/DROID_SignatureFile.xml");
-			ContainerSignatureDefinitions containerSigDef = droidResource.readContSigFile("conf/container-signature.xml");
+			ContainerSignatureDefinitions containerSigDef = droidResource
+					.readContSigFile("conf/container-signature.xml");
 			HashMap<Object, Object> map = new HashMap<Object, Object>();
 			List<Object> sigList = new ArrayList<Object>();
 			sigList.add(sigFile);
 			sigList.add(containerSigDef);
-			map.put(CacheServices.DROID_SIGNATURE+SIG_VERSION, sigList);
-			CacheServices.getInstance().setCacheValue(CacheServices.DROID_SIGNATURE+SIG_VERSION, map, false);
+			map.put(CacheServices.DROID_SIGNATURE + SIG_VERSION, sigList);
+			CacheServices.getInstance().setCacheValue(CacheServices.DROID_SIGNATURE + SIG_VERSION, map, false);
 		} catch (Exception e) {
 			log.error("Failed loading signature files to cache", e);
 		}
