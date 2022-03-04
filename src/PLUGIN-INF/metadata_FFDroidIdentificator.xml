@@ -14,7 +14,7 @@
 			<label>ui.formatidentification.label</label>
 			<ui_tool_tip>ui.formatidentification.tooltip</ui_tool_tip>
 			<single>false</single>
-			<default_value>65536</default_value>
+			<default_value>-1</default_value>
 			<mandatory>true</mandatory>
 			<x_logic_type>String</x_logic_type>
 			<x_ui_type>TextField</x_ui_type>
