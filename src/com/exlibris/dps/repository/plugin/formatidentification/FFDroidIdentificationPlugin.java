@@ -34,7 +34,7 @@ public class FFDroidIdentificationPlugin implements FormatIdentificationPlugin {
 	 * this parameter is used for signature file caching. When new signature file attached, update SIG_VERSION
 	 * Or 2 different plugins with the same jar path and jar name
 	 */
-	private static String SIG_VERSION = "_53";
+	private static String SIG_VERSION = "_100";
 
 	static{
 		Map map;

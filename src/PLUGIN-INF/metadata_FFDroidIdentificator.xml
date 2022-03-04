@@ -14,7 +14,7 @@
 			<label>ui.formatidentification.label</label>
 			<ui_tool_tip>ui.formatidentification.tooltip</ui_tool_tip>
 			<single>false</single>
-			<default_value>65536</default_value>
+			<default_value>-1</default_value>
 			<mandatory>true</mandatory>
 			<x_logic_type>String</x_logic_type>
 			<x_ui_type>TextField</x_ui_type>
@@ -24,7 +24,7 @@
 </fr:x_form>
 </pl:initParameters>
   <pl:description>DROID file format identifier</pl:description>
-  <pl:version>96.3</pl:version>
+  <pl:version>100</pl:version>
   <pl:materialType>DIGITAL</pl:materialType>
   <pl:module>Repository</pl:module>
   <pl:generalType>TASK</pl:generalType>
