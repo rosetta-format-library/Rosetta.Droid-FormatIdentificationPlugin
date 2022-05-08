@@ -20,7 +20,7 @@ import com.exlibris.dps.sdk.formatidentification.FormatIdentificationResult;
 public class FFDroidIdentificationPlugin implements FormatIdentificationPlugin {
 	private static final String PLUGIN_VERSION_INIT_PARAM = "PLUGIN_VERSION_INIT_PARAM";
 	private static String AGENT_NAME = "REG_SA_DROID";
-	private static String AGENT_VERSION = "6.5.2";
+	private static String AGENT_VERSION = "6.5.3";
 	private static String REGISTRY_NAME = "PRONOM";
 	private long maxBytesToScan = 65536;
 	private boolean inTag = false;
@@ -35,7 +35,7 @@ public class FFDroidIdentificationPlugin implements FormatIdentificationPlugin {
 	 * attached, update SIG_VERSION Or 2 different plugins with the same jar path
 	 * and jar name
 	 */
-	private static String SIG_VERSION = "_54";
+	private static String SIG_VERSION = "_104";
 
 	static {
 		Map map=null;
