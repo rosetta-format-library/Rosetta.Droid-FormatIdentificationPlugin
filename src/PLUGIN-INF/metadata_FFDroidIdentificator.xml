@@ -24,7 +24,7 @@
 </fr:x_form>
 </pl:initParameters>
   <pl:description>DROID file format identifier</pl:description>
-  <pl:version>104</pl:version>
+  <pl:version>108</pl:version>
   <pl:materialType>DIGITAL</pl:materialType>
   <pl:module>Repository</pl:module>
   <pl:generalType>TASK</pl:generalType>
